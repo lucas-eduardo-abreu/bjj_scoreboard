@@ -17,7 +17,7 @@ function checkPenaltyConsequences(playerKey) {
   if (pen === 2) {
     opponent.advantageIncrement();
   } else if (pen === 3) {
-    addPointsToPlayer(opponent, 4);
+    addPointsToPlayer(opponent, 2);
   } else if (pen >= 4) {
     timer.stop();
     showVictory(opponentKey, 'DQ');
@@ -43,8 +43,7 @@ function showVictory(winnerKey, reason) {
 
   overlay.className = 'victory-overlay' + (winnerKey ? ` victory--${winnerKey}` : ' victory--tie');
 
-  document.getElementById('victory-headline').textContent =
-    reason === 'DQ' ? 'DESCLASSIFICAÇÃO' : winnerKey ? 'VITÓRIA' : 'EMPATE';
+  document.getElementById('victory-headline').textContent = 'VITÓRIA';
 
   const nameEl = winnerKey
     ? document.querySelector(`[data-player-name="${winnerKey}"]`)
@@ -52,8 +51,9 @@ function showVictory(winnerKey, reason) {
   document.getElementById('victory-name').textContent = nameEl ? nameEl.textContent : '—';
 
   const reasonMap = {
-    DQ:   'por desclassificação',
-    time: 'ao fim do tempo regulamentar',
+    DQ:         'por desclassificação',
+    time:       'por pontos',
+    submission: 'por finalização',
   };
   document.getElementById('victory-reason').textContent = reasonMap[reason] ?? '';
 
@@ -84,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const { player, action } = btn.dataset;
       window[player][action]();
       if (action === 'punishmentIncrement') checkPenaltyConsequences(player);
+    });
+  });
+
+  document.querySelectorAll('[data-winner]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      timer.stop();
+      showVictory(btn.dataset.winner, 'submission');
     });
   });
 

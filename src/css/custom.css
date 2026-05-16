@@ -28,7 +28,7 @@ html, body {
 
 .col-headers {
   display: grid;
-  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width);
+  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width);
   height: var(--header-height);
   background: var(--header-bg);
   border-bottom: 1px solid #000;
@@ -50,7 +50,7 @@ html, body {
 
 .player-row {
   display: grid;
-  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width);
+  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width) var(--cell-width);
   height: var(--row-height);
   border-bottom: 2px solid #000;
 }
@@ -100,6 +100,7 @@ html, body {
 .score-cell.pts { background: var(--pts-color); }
 .score-cell.adv { background: var(--adv-color); }
 .score-cell.pen { background: var(--pen-color); }
+.score-cell.fin { background: #111; justify-content: center; gap: 0; }
 
 .cell-val {
   font-family: 'Bebas Neue', sans-serif;
@@ -113,6 +114,21 @@ html, body {
 
 /* Yellow cell: dark text for contrast */
 .score-cell.adv .cell-val { color: #1a1a1a; }
+
+.btn-ko {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.6);
+  transition: background 0.12s, color 0.12s;
+}
+
+.btn-ko:hover  { background: rgba(255,60,60,0.55); color: #fff; }
+.btn-ko:active { background: rgba(255,60,60,0.8); }
 
 .cell-btn {
   font-family: 'Bebas Neue', sans-serif;
@@ -270,7 +286,8 @@ html, body {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.6rem;
   letter-spacing: 0.35em;
-  opacity: 0.65;
+  color: #4cde7a;
+  opacity: 1;
   margin-bottom: 0.5rem;
 }
 

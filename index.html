@@ -21,6 +21,7 @@
     <div class="score-header pts-header">PTS</div>
     <div class="score-header adv-header">ADV</div>
     <div class="score-header pen-header">PEN</div>
+    <div class="score-header fin-header">FIN</div>
   </div>
 
   <!-- Player 1 row -->
@@ -44,6 +45,9 @@
       <span class="cell-val" data-point-punishment="player1">0</span>
       <button class="cell-btn dec" data-player="player1" data-action="punishmentDecrement">−</button>
     </div>
+    <div class="score-cell fin">
+      <button class="btn-ko" data-winner="player1">K.O.</button>
+    </div>
   </div>
 
   <!-- Player 2 row -->
@@ -66,6 +70,9 @@
       <button class="cell-btn inc" data-player="player2" data-action="punishmentIncrement">+</button>
       <span class="cell-val" data-point-punishment="player2">0</span>
       <button class="cell-btn dec" data-player="player2" data-action="punishmentDecrement">−</button>
+    </div>
+    <div class="score-cell fin">
+      <button class="btn-ko" data-winner="player2">K.O.</button>
     </div>
   </div>
 
