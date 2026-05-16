@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('myBtn');
   const span = document.querySelector('.close');
 
-  btn.addEventListener('click', () => { modal.style.display = 'flex'; });
-  span.addEventListener('click', () => { modal.style.display = 'none'; });
+  btn.addEventListener('click', () => { modal.classList.add('open'); });
+  span.addEventListener('click', () => { modal.classList.remove('open'); });
   window.addEventListener('click', (e) => {
-    if (e.target === modal) { modal.style.display = 'none'; }
+    if (e.target === modal) { modal.classList.remove('open'); }
   });
 });

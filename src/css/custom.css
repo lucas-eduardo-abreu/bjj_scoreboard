@@ -1,223 +1,235 @@
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
   font-family: 'Roboto', sans-serif;
 }
 
-body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  background-color: var(--bg-color);
-}
+/* ── Layout ─────────────────────────────────────────── */
 
 main {
-  display: flex;
-  width: 95%;
+  display: grid;
+  grid-template-columns: 1fr 220px 1fr;
+  height: 100vh;
+  width: 100vw;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 9;
-}
+/* ── Player panels ───────────────────────────────────── */
 
-section>div.player1 {
-  background-color: var(--p1-primary-color);
-  color: var(--p1-secondary-color)
-}
-
-section>div.player2 {
-  background-color: var(--p2-primary-color);
-  color: var(--p2-secondary-color)
-}
-
-sidebar {
+.player-panel {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
-  background-color: var(--sidebar-bg-color);
-}
-
-.total-points {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 12rem;
-  font-weight: bolder;
-}
-
-.total-points.player1 {
-  color: var(--p1-primary-color)
-}
-
-.total-points.player2 {
-  color: var(--p2-primary-color)
-}
-
-.timer-content {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  flex-grow: 6;
   justify-content: center;
-  align-items: center;
-  font-weight: bolder;
-  background-color: var(--timer-bg-color);
-  color: var(--timer-text-color);
-  flex: 1;
+  gap: 2rem;
+  padding: 2rem 1.5rem;
 }
 
-.timer-content>.timer-display {
-  font-size: 7rem;
-}
+.player-panel.player1 { background: var(--p1-bg); color: var(--p1-text); }
+.player-panel.player2 { background: var(--p2-bg); color: var(--p2-text); }
 
-.timer-content>.timer-controls {
-  font-size: 1rem;
-}
-
-.atleta-name {
-  padding: 1rem 0;
-  font-size: 3rem;
-  font-weight: bolder;
+.player-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
-  border-bottom: 1px solid rgba(228, 227, 227, 0.171);
-  margin-bottom: 0.3rem;
+  opacity: 0.9;
 }
 
-.points-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
+/* ── Main score ──────────────────────────────────────── */
 
-.point-content {
+.score-block {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  flex-grow: 3;
+  gap: 0.5rem;
 }
 
-.two-point-content>.point-content>.point-title {
-  font-size: 1rem;
-  min-height: 0;
+.score-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
 }
 
-.two-point-content>.point-content>.point-value {
-  font-size: 3rem;
+.score-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(7rem, 14vw, 12rem);
+  line-height: 1;
 }
 
-.point-controls {
+.score-controls {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  gap: 0.75rem;
 }
 
-.point-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: bolder;
-  text-align: center;
-  min-height: 4rem;
-}
-
-.point-value {
-  font-size: 6rem;
-  font-weight: bolder;
-  ;
-}
-
-.btn {
-  background-color: rgb(243, 243, 243);
-  border: none;
-  color: black;
-  padding: 0.5rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  margin: 0.5rem;
+.btn-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--btn-radius);
   cursor: pointer;
-  border-radius: 0.3rem;
+  background: rgba(255,255,255,0.12);
+  color: inherit;
+  transition: background 0.15s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-score:hover  { background: rgba(255,255,255,0.22); }
+.btn-score:active { transform: scale(0.93); }
+
+.step-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  opacity: 0.55;
   min-width: 1.5rem;
-  opacity: 1;
+  text-align: center;
 }
 
-a.btn:hover {
-  outline: none;
-  opacity: 0.8;
-  transition: 0.3s ease-in-out;
+/* ── Sub scores (advantage / punishment) ────────────── */
+
+.sub-scores {
+  display: flex;
+  gap: 2rem;
 }
 
-.hide {
-  display: none;
-}
-
-a.config>img {
-  width: 3.5rem;
-  height: 3.5rem;
-  background-color: none;
-  position: absolute;
-  z-index: 1000;
-  right: 0.5rem;
-  bottom: 0.5rem;
-}
-
-a.config:hover {
-  cursor: pointer;
-}
-
-form {
+.sub-block {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  max-width: 400px;
+  gap: 0.3rem;
 }
 
-.form-input {
+.sub-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.sub-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.sub-controls {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-sub {
+  font-size: 1.1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  color: inherit;
+  transition: background 0.15s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-sub:hover  { background: rgba(255,255,255,0.2); }
+.btn-sub:active { transform: scale(0.91); }
+
+/* ── Center panel ────────────────────────────────────── */
+
+.center-panel {
+  background: var(--center-bg);
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  padding: 1rem;
+}
+
+.timer-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  color: var(--timer-color);
+  letter-spacing: 0.05em;
+}
+
+.timer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   width: 100%;
-  min-width: 320px;
 }
 
-label {
-  padding: 0.5rem;
-  font-size: 1rem;
-  font-weight: bolder;
+.btn-timer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1rem;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
   width: 100%;
+  background: rgba(255,255,255,0.9);
+  color: #111;
+  transition: background 0.15s, transform 0.1s;
 }
 
-input[type=submit] {
-  margin-top: 1.5rem;
+.btn-timer:hover  { background: #fff; }
+.btn-timer:active { transform: scale(0.97); }
+
+.btn-timer.secondary {
+  background: rgba(255,255,255,0.12);
+  color: var(--timer-color);
 }
 
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.btn-timer.secondary:hover { background: rgba(255,255,255,0.2); }
+
+.btn-config {
+  position: absolute;
+  bottom: 1rem;
+  right: 0.75rem;
+  background: none;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+  padding: 0;
+  display: flex;
 }
 
-audio {
-  display: none;
+.btn-config:hover { opacity: 0.85; }
+
+.btn-config img {
+  width: 2rem;
+  height: 2rem;
 }
+
+/* ── Score category colors ───────────────────────────── */
+
+.score-block .score-value { color: #4cde7a; }   /* points → green  */
+
+.sub-block:nth-child(1) .sub-value { color: #f5c842; }  /* advantage → yellow */
+.sub-block:nth-child(2) .sub-value { color: #e84040; }  /* punishment → red   */
+
+/* ── Utility ─────────────────────────────────────────── */
+
+.hide { display: none !important; }
+
+audio { display: none; }
