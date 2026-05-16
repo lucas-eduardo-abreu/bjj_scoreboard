@@ -1,13 +1,15 @@
 function Timer(minute = 0, renderElementSelector = '[data-show-timer]', countdownSoundSelector = '[data-countdown-sound]') {
   this.minute = minute;
   this.started = false;
+  this._remainingMs = minute * 60 * 1000;
+  this._endTime = null;
 
-  this.timeInSeconds = () => {
-    return this.minute * 60;
-  }
+  this.timeInSeconds = () => Math.ceil(this._remainingMs / 1000);
 
   this.setMinutes = (minute) => {
     this.minute = minute;
+    this._remainingMs = minute * 60 * 1000;
+    this._endTime = null;
     this.stop();
     this.render();
   }
@@ -16,49 +18,51 @@ function Timer(minute = 0, renderElementSelector = '[data-show-timer]', countdow
 
   this.start = () => {
     this.started = true;
+    this._endTime = Date.now() + this._remainingMs;
 
     this.interval = setInterval(() => {
-      if (this.timeInSeconds() >= 1) {
-        this.minute = (this.timeInSeconds() - 1) / 60;
-      } else {
-        this.minute = 0;
+      this._remainingMs = Math.max(0, this._endTime - Date.now());
+
+      this.countSoundPlayer(this.timeInSeconds() <= 4 && this.timeInSeconds() > 0);
+      this.render();
+
+      if (this._remainingMs <= 0) {
+        this.started = false;
         clearInterval(this.interval);
       }
-
-      this.countSoundPlayer(this.timeInSeconds() <= 4)
-
-      this.render();
-    }, 1000);
+    }, 100);
   }
 
   this.stop = () => {
     this.started = false;
-    this.countSoundPlayer(false)
-
+    if (this._endTime !== null) {
+      this._remainingMs = Math.max(0, this._endTime - Date.now());
+      this._endTime = null;
+    }
+    this.countSoundPlayer(false);
     clearInterval(this.interval);
   }
 
   this.reset = () => {
-    this.minute = 0;
+    this._remainingMs = 0;
+    this._endTime = null;
     this.render();
   }
 
   this.timer_format = () => {
-    const minutes = Math.floor(this.timeInSeconds() / 60);
-    const seconds = this.timeInSeconds() % 60;
-
-    return `${minutes.toFixed(0).padStart(2, '0')}:${seconds.toFixed(0).padStart(2, '0')}`;
+    const total = this.timeInSeconds();
+    const minutes = Math.floor(total / 60);
+    const seconds = total % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   }
 
   this.render = () => {
-    const element = document.querySelector(renderElementSelector)
-
-    if (element) { element.innerHTML = this.timer_format() }
+    const element = document.querySelector(renderElementSelector);
+    if (element) { element.innerHTML = this.timer_format(); }
   }
 
   this.countSoundPlayer = (play = true) => {
     const audioPlayer = document.querySelector(countdownSoundSelector);
-
     if (play) {
       audioPlayer.paused && audioPlayer.play();
     } else {

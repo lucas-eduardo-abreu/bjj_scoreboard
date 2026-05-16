@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const data = new FormData(e.target);
+    const modal = document.getElementById('myModal');
 
     timer.reset();
     player1.reset();
@@ -14,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     timer.stop();
     timer.setMinutes(data.get('timer'));
 
-    modal.style.display = "none";
+    const step = parseInt(data.get('point-step') || '2', 10);
+    pointValues.normal = step;
+    document.querySelectorAll('[data-point-step]').forEach(el => { el.innerHTML = step; });
+
+    modal.style.display = 'none';
   });
 });

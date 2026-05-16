@@ -22,9 +22,9 @@
             <div class="point-title">Adição de Pontos</div>
             <div class="point-value" data-point-normal="player1">0</div>
             <div class="point-controls">
-              <a class="btn" onclick="player1.normalDecrement()">-</a>
-              <div class="point-count">1</div>
-              <a class="btn" onclick="player1.normalIncrement()">+</a>
+              <a class="btn" data-player="player1" data-action="normalDecrement">-</a>
+              <div class="point-count" data-point-step>2</div>
+              <a class="btn" data-player="player1" data-action="normalIncrement">+</a>
             </div>
           </div>
 
@@ -34,8 +34,8 @@
               <div class="point-title">Vantagem</div>
               <div class="point-value" data-point-advantage="player1">0</div>
               <div class="point-controls">
-                <a class="btn" onclick="player1.advantageDecrement()">-</a>
-                <a class="btn" onclick="player1.advantageIncrement()">+</a>
+                <a class="btn" data-player="player1" data-action="advantageDecrement">-</a>
+                <a class="btn" data-player="player1" data-action="advantageIncrement">+</a>
               </div>
             </div>
 
@@ -44,8 +44,8 @@
               <div class="point-title">Punição</div>
               <div class="point-value" data-point-punishment="player1">0</div>
               <div class="point-controls">
-                <a class="btn" onclick="player1.punishmentDecrement()">-</a>
-                <a class="btn" onclick="player1.punishmentIncrement()">+</a>
+                <a class="btn" data-player="player1" data-action="punishmentDecrement">-</a>
+                <a class="btn" data-player="player1" data-action="punishmentIncrement">+</a>
               </div>
             </div>
 
@@ -60,9 +60,9 @@
             <div class="point-title">Adição de Pontos</div>
             <div class="point-value" data-point-normal="player2">0</div>
             <div class="point-controls">
-              <a class="btn" onclick="player2.normalDecrement()">-</a>
-              <div class="point-count">1</div>
-              <a class="btn" onclick="player2.normalIncrement()">+</a>
+              <a class="btn" data-player="player2" data-action="normalDecrement">-</a>
+              <div class="point-count" data-point-step>2</div>
+              <a class="btn" data-player="player2" data-action="normalIncrement">+</a>
             </div>
           </div>
 
@@ -72,8 +72,8 @@
               <div class="point-title">Vantagem</div>
               <div class="point-value" data-point-advantage="player2">0</div>
               <div class="point-controls">
-                <a class="btn" onclick="player2.advantageDecrement()">-</a>
-                <a class="btn" onclick="player2.advantageIncrement()">+</a>
+                <a class="btn" data-player="player2" data-action="advantageDecrement">-</a>
+                <a class="btn" data-player="player2" data-action="advantageIncrement">+</a>
               </div>
             </div>
 
@@ -82,8 +82,8 @@
               <div class="point-title">Punição</div>
               <div class="point-value" data-point-punishment="player2">0</div>
               <div class="point-controls">
-                <a class="btn" onclick="player2.punishmentDecrement()">-</a>
-                <a class="btn" onclick="player2.punishmentIncrement()">+</a>
+                <a class="btn" data-player="player2" data-action="punishmentDecrement">-</a>
+                <a class="btn" data-player="player2" data-action="punishmentIncrement">+</a>
               </div>
             </div>
 
@@ -128,6 +128,15 @@
       <div class="form-input">
         <label for="timer">Tempo: <span></span></label>
         <input type="range" id="timer" name="timer" min="0" max="10">
+      </div>
+
+      <div class="form-input">
+        <label for="point-step">Pontos por ação:</label>
+        <select name="point-step" id="point-step">
+          <option value="2" selected>2 pts — Rasteira / Derrubada</option>
+          <option value="3">3 pts — Passagem de Guarda</option>
+          <option value="4">4 pts — Montada / Costa</option>
+        </select>
       </div>
 
       <input type="submit" class="btn" value="Configurar">
