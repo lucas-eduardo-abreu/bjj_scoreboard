@@ -29,6 +29,7 @@ function Timer(minute = 0, renderElementSelector = '[data-show-timer]', countdow
       if (this._remainingMs <= 0) {
         this.started = false;
         clearInterval(this.interval);
+        if (typeof this.onEnd === 'function') this.onEnd();
       }
     }, 100);
   }
