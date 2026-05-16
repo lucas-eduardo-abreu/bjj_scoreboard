@@ -266,20 +266,10 @@ html, body {
   to   { transform: scale(1);    opacity: 1; }
 }
 
-.victory--player1 .victory-card {
-  background: rgba(13, 43, 85, 0.97);
-  border-color: var(--p1-accent);
-  color: var(--p1-text);
-}
-.victory--player2 .victory-card {
-  background: rgba(74, 10, 10, 0.97);
-  border-color: var(--p2-accent);
-  color: var(--p2-text);
-}
-.victory--tie .victory-card {
-  background: rgba(20, 20, 20, 0.97);
-  border-color: #888;
-  color: #eee;
+.victory-card {
+  background: rgba(10, 80, 40, 0.97);
+  border-color: #4cde7a;
+  color: #ffffff;
 }
 
 .victory-headline {
