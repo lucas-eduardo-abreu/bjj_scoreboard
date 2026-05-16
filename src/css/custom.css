@@ -3,230 +3,219 @@
   margin: 0;
   padding: 0;
   border: none;
+  font-family: 'Roboto', sans-serif;
 }
 
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background: var(--bg);
-  font-family: 'Roboto', sans-serif;
-}
-
-/* ── Layout ─────────────────────────────────────────── */
-
-main {
-  display: grid;
-  grid-template-columns: 1fr 220px 1fr;
-  height: 100vh;
-  width: 100vw;
-}
-
-/* ── Player panels ───────────────────────────────────── */
-
-.player-panel {
+  background: var(--body-bg);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem 1.5rem;
 }
 
-.player-panel.player1 { background: var(--p1-bg); color: var(--p1-text); }
-.player-panel.player2 { background: var(--p2-bg); color: var(--p2-text); }
+/* ── Scoreboard container ────────────────────────────── */
+
+.scoreboard {
+  width: min(960px, 100vw);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+
+/* ── Column headers ──────────────────────────────────── */
+
+.col-headers {
+  display: grid;
+  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width);
+  height: var(--header-height);
+  background: var(--header-bg);
+  border-bottom: 1px solid #000;
+}
+
+.name-col { background: var(--header-bg); }
+
+.score-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── Player rows ─────────────────────────────────────── */
+
+.player-row {
+  display: grid;
+  grid-template-columns: 1fr var(--cell-width) var(--cell-width) var(--cell-width);
+  height: var(--row-height);
+  border-bottom: 2px solid #000;
+}
+
+.player-info {
+  background: var(--name-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.25rem;
+  gap: 0.2rem;
+  border-right: 2px solid #000;
+}
 
 .player-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: 0.1em;
+  font-weight: 900;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: #ffffff;
   text-transform: uppercase;
-  text-align: center;
-  opacity: 0.9;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* ── Main score ──────────────────────────────────────── */
-
-.score-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.score-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-.score-value {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(7rem, 14vw, 12rem);
-  line-height: 1;
-}
-
-.score-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.btn-score {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--btn-radius);
-  cursor: pointer;
-  background: rgba(255,255,255,0.12);
-  color: inherit;
-  transition: background 0.15s, transform 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-score:hover  { background: rgba(255,255,255,0.22); }
-.btn-score:active { transform: scale(0.93); }
-
-.step-badge {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  opacity: 0.55;
-  min-width: 1.5rem;
-  text-align: center;
-}
-
-/* ── Sub scores (advantage / punishment) ────────────── */
-
-.sub-scores {
-  display: flex;
-  gap: 2rem;
-}
-
-.sub-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.sub-label {
+.player-team {
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
   text-transform: uppercase;
-  opacity: 0.55;
+  letter-spacing: 0.08em;
 }
 
-.sub-value {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1;
-}
+/* ── Score cells ─────────────────────────────────────── */
 
-.sub-controls {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.btn-sub {
-  font-size: 1.1rem;
-  width: 2rem;
-  height: 2rem;
-  border-radius: var(--btn-radius);
-  cursor: pointer;
-  background: rgba(255,255,255,0.1);
-  color: inherit;
-  transition: background 0.15s, transform 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-sub:hover  { background: rgba(255,255,255,0.2); }
-.btn-sub:active { transform: scale(0.91); }
-
-/* ── Center panel ────────────────────────────────────── */
-
-.center-panel {
-  background: var(--center-bg);
+.score-cell {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  border-right: 2px solid #000;
+  padding: 6px 0;
   position: relative;
-  padding: 1rem;
+  cursor: default;
+}
+
+.score-cell.pts { background: var(--pts-color); }
+.score-cell.adv { background: var(--adv-color); }
+.score-cell.pen { background: var(--pen-color); }
+
+.cell-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 5rem);
+  line-height: 1;
+  color: #fff;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Yellow cell: dark text for contrast */
+.score-cell.adv .cell-val { color: #1a1a1a; }
+
+.cell-btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  width: 100%;
+  padding: 3px 0;
+  cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.18);
+  transition: background 0.12s, color 0.12s;
+  text-align: center;
+}
+
+.score-cell.adv .cell-btn { color: rgba(0,0,0,0.5); background: rgba(0,0,0,0.12); }
+
+.cell-btn:hover  { background: rgba(0,0,0,0.35); color: #fff; }
+.cell-btn:active { background: rgba(0,0,0,0.55); }
+.score-cell.adv .cell-btn:hover { color: #000; }
+
+/* ── Timer row ───────────────────────────────────────── */
+
+.timer-row {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  height: var(--timer-height);
+  align-items: stretch;
+  position: relative;
+}
+
+.timer-cell {
+  background: var(--timer-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #000;
 }
 
 .timer-display {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.5rem, 6vw, 5.5rem);
-  color: var(--timer-color);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  color: #fff;
   letter-spacing: 0.05em;
 }
 
-.timer-controls {
+.match-info {
+  background: var(--info-bg);
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
 }
 
-.btn-timer {
-  font-family: 'Roboto', sans-serif;
+.match-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-ctrl {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.7rem 1rem;
-  border-radius: var(--btn-radius);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
   cursor: pointer;
-  width: 100%;
-  background: rgba(255,255,255,0.9);
+  background: #fff;
   color: #111;
-  transition: background 0.15s, transform 0.1s;
+  transition: background 0.12s, transform 0.08s;
+  white-space: nowrap;
 }
 
-.btn-timer:hover  { background: #fff; }
-.btn-timer:active { transform: scale(0.97); }
+.btn-ctrl:hover  { background: #e0e0e0; }
+.btn-ctrl:active { transform: scale(0.96); }
 
-.btn-timer.secondary {
-  background: rgba(255,255,255,0.12);
-  color: var(--timer-color);
+.btn-ctrl.secondary {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
 }
 
-.btn-timer.secondary:hover { background: rgba(255,255,255,0.2); }
+.btn-ctrl.secondary:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+.step-info {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+}
+
+.step-info strong { color: rgba(255,255,255,0.6); }
 
 .btn-config {
-  position: absolute;
-  bottom: 1rem;
-  right: 0.75rem;
   background: none;
   cursor: pointer;
-  opacity: 0.45;
-  transition: opacity 0.2s;
-  padding: 0;
+  padding: 0 0.75rem;
   display: flex;
+  align-items: center;
+  opacity: 0.35;
+  transition: opacity 0.15s;
 }
 
-.btn-config:hover { opacity: 0.85; }
+.btn-config:hover { opacity: 0.8; }
 
-.btn-config img {
-  width: 2rem;
-  height: 2rem;
-}
-
-/* ── Score category colors ───────────────────────────── */
-
-.score-block .score-value { color: #4cde7a; }   /* points → green  */
-
-.sub-block:nth-child(1) .sub-value { color: #f5c842; }  /* advantage → yellow */
-.sub-block:nth-child(2) .sub-value { color: #e84040; }  /* punishment → red   */
+.btn-config img { width: 1.8rem; height: 1.8rem; }
 
 /* ── Utility ─────────────────────────────────────────── */
 

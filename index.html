@@ -1,148 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BJJ Scoreboard</title>
-  <meta name="keywords" content="jiujitsu, jiu-jitsu, placar, eletrônico, digital, campeonato, CBJJ, CBJJE">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./src/css/themes.css">
   <link rel="stylesheet" href="./src/css/custom.css">
   <link rel="stylesheet" href="./src/css/modal.css">
 </head>
-
 <body>
 
-  <main>
+<main class="scoreboard">
 
-    <!-- Player 1 -->
-    <div class="player-panel player1">
-      <div class="player-name" data-player-name="player1">Atleta 1</div>
+  <!-- Column headers -->
+  <div class="col-headers">
+    <div class="name-col"></div>
+    <div class="score-header pts-header">PTS</div>
+    <div class="score-header adv-header">ADV</div>
+    <div class="score-header pen-header">PEN</div>
+  </div>
 
-      <div class="score-block">
-        <div class="score-label">Pontos</div>
-        <div class="score-value" data-point-total="player1">0</div>
-        <div class="score-controls">
-          <button class="btn-score" data-player="player1" data-action="normalDecrement">−</button>
-          <span class="step-badge" data-point-step>2</span>
-          <button class="btn-score" data-player="player1" data-action="normalIncrement">+</button>
-        </div>
-      </div>
-
-      <div class="sub-scores">
-        <div class="sub-block">
-          <div class="sub-label">Vantagem</div>
-          <div class="sub-value" data-point-advantage="player1">0</div>
-          <div class="sub-controls">
-            <button class="btn-sub" data-player="player1" data-action="advantageDecrement">−</button>
-            <button class="btn-sub" data-player="player1" data-action="advantageIncrement">+</button>
-          </div>
-        </div>
-        <div class="sub-block">
-          <div class="sub-label">Punição</div>
-          <div class="sub-value" data-point-punishment="player1">0</div>
-          <div class="sub-controls">
-            <button class="btn-sub" data-player="player1" data-action="punishmentDecrement">−</button>
-            <button class="btn-sub" data-player="player1" data-action="punishmentIncrement">+</button>
-          </div>
-        </div>
-      </div>
+  <!-- Player 1 row -->
+  <div class="player-row">
+    <div class="player-info">
+      <span class="player-name" data-player-name="player1">ATLETA 1</span>
+      <span class="player-team">EQUIPE</span>
     </div>
-
-    <!-- Center: timer + controls -->
-    <div class="center-panel">
-      <div class="timer-display" data-show-timer>00:00</div>
-      <div class="timer-controls">
-        <button class="btn-timer" data-timer-start>Iniciar</button>
-        <button class="btn-timer secondary" data-game-reset>Reiniciar</button>
-      </div>
-      <button class="btn-config" id="myBtn" title="Configurar" data-config-content>
-        <img src="./src/images/config.png" alt="config">
-      </button>
+    <div class="score-cell pts">
+      <button class="cell-btn inc" data-player="player1" data-action="normalIncrement">+</button>
+      <span class="cell-val" data-point-total="player1">0</span>
+      <button class="cell-btn dec" data-player="player1" data-action="normalDecrement">−</button>
     </div>
-
-    <!-- Player 2 -->
-    <div class="player-panel player2">
-      <div class="player-name" data-player-name="player2">Atleta 2</div>
-
-      <div class="score-block">
-        <div class="score-label">Pontos</div>
-        <div class="score-value" data-point-total="player2">0</div>
-        <div class="score-controls">
-          <button class="btn-score" data-player="player2" data-action="normalDecrement">−</button>
-          <span class="step-badge" data-point-step>2</span>
-          <button class="btn-score" data-player="player2" data-action="normalIncrement">+</button>
-        </div>
-      </div>
-
-      <div class="sub-scores">
-        <div class="sub-block">
-          <div class="sub-label">Vantagem</div>
-          <div class="sub-value" data-point-advantage="player2">0</div>
-          <div class="sub-controls">
-            <button class="btn-sub" data-player="player2" data-action="advantageDecrement">−</button>
-            <button class="btn-sub" data-player="player2" data-action="advantageIncrement">+</button>
-          </div>
-        </div>
-        <div class="sub-block">
-          <div class="sub-label">Punição</div>
-          <div class="sub-value" data-point-punishment="player2">0</div>
-          <div class="sub-controls">
-            <button class="btn-sub" data-player="player2" data-action="punishmentDecrement">−</button>
-            <button class="btn-sub" data-player="player2" data-action="punishmentIncrement">+</button>
-          </div>
-        </div>
-      </div>
+    <div class="score-cell adv">
+      <button class="cell-btn inc" data-player="player1" data-action="advantageIncrement">+</button>
+      <span class="cell-val" data-point-advantage="player1">0</span>
+      <button class="cell-btn dec" data-player="player1" data-action="advantageDecrement">−</button>
     </div>
-
-  </main>
-
-  <!-- Config modal -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Configurar Luta</h2>
-      <form class="form-submit">
-        <div class="form-input">
-          <label for="player1-name">Atleta 1</label>
-          <input type="text" name="player1" id="player1-name" placeholder="Nome do atleta" autocomplete="off">
-        </div>
-        <div class="form-input">
-          <label for="player2-name">Atleta 2</label>
-          <input type="text" name="player2" id="player2-name" placeholder="Nome do atleta" autocomplete="off">
-        </div>
-        <div class="form-input">
-          <label for="timer">Tempo: <span class="timer-preview"></span></label>
-          <input type="range" id="timer" name="timer" min="0" max="10">
-        </div>
-        <div class="form-input">
-          <label for="point-step">Pontos por ação</label>
-          <select name="point-step" id="point-step">
-            <option value="2" selected>2 pts — Rasteira / Derrubada</option>
-            <option value="3">3 pts — Passagem de Guarda</option>
-            <option value="4">4 pts — Montada / Costa</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-submit">Configurar</button>
-      </form>
+    <div class="score-cell pen">
+      <button class="cell-btn inc" data-player="player1" data-action="punishmentIncrement">+</button>
+      <span class="cell-val" data-point-punishment="player1">0</span>
+      <button class="cell-btn dec" data-player="player1" data-action="punishmentDecrement">−</button>
     </div>
   </div>
 
-  <audio data-countdown-sound>
-    <source src="./src/audio/323129-Crowd_chants_a_countdown--three-two-one-.mp3" type="audio/mp3">
-    <source src="./src/audio/mixkit-short-race-countdown-926.wav" type="audio/wav">
-  </audio>
+  <!-- Player 2 row -->
+  <div class="player-row">
+    <div class="player-info">
+      <span class="player-name" data-player-name="player2">ATLETA 2</span>
+      <span class="player-team">EQUIPE</span>
+    </div>
+    <div class="score-cell pts">
+      <button class="cell-btn inc" data-player="player2" data-action="normalIncrement">+</button>
+      <span class="cell-val" data-point-total="player2">0</span>
+      <button class="cell-btn dec" data-player="player2" data-action="normalDecrement">−</button>
+    </div>
+    <div class="score-cell adv">
+      <button class="cell-btn inc" data-player="player2" data-action="advantageIncrement">+</button>
+      <span class="cell-val" data-point-advantage="player2">0</span>
+      <button class="cell-btn dec" data-player="player2" data-action="advantageDecrement">−</button>
+    </div>
+    <div class="score-cell pen">
+      <button class="cell-btn inc" data-player="player2" data-action="punishmentIncrement">+</button>
+      <span class="cell-val" data-point-punishment="player2">0</span>
+      <button class="cell-btn dec" data-player="player2" data-action="punishmentDecrement">−</button>
+    </div>
+  </div>
 
-  <script src="./src/js/player.js"></script>
-  <script src="./src/js/timer.js"></script>
-  <script src="./src/js/game.js"></script>
-  <script src="./src/js/modal.js"></script>
-  <script src="./src/js/form-submit.js"></script>
-  <script src="./src/js/refresh-page.js"></script>
+  <!-- Timer row -->
+  <div class="timer-row">
+    <div class="timer-cell">
+      <span class="timer-display" data-show-timer>0:00</span>
+    </div>
+    <div class="match-info">
+      <div class="match-controls">
+        <button class="btn-ctrl" data-timer-start>Iniciar</button>
+        <button class="btn-ctrl secondary" data-game-reset>Reiniciar</button>
+      </div>
+      <div class="step-info">
+        <span>Pontos por ação: </span>
+        <strong data-point-step>2</strong>
+      </div>
+    </div>
+    <button class="btn-config" id="myBtn" title="Configurar">
+      <img src="./src/images/config.png" alt="config">
+    </button>
+  </div>
+
+</main>
+
+<!-- Config modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Configurar Luta</h2>
+    <form class="form-submit">
+      <div class="form-input">
+        <label for="player1-name">Atleta 1</label>
+        <input type="text" name="player1" id="player1-name" placeholder="Nome do atleta" autocomplete="off">
+      </div>
+      <div class="form-input">
+        <label for="player1-team">Equipe do Atleta 1</label>
+        <input type="text" name="team1" id="player1-team" placeholder="Nome da equipe" autocomplete="off">
+      </div>
+      <div class="form-input">
+        <label for="player2-name">Atleta 2</label>
+        <input type="text" name="player2" id="player2-name" placeholder="Nome do atleta" autocomplete="off">
+      </div>
+      <div class="form-input">
+        <label for="player2-team">Equipe do Atleta 2</label>
+        <input type="text" name="team2" id="player2-team" placeholder="Nome da equipe" autocomplete="off">
+      </div>
+      <div class="form-input">
+        <label for="timer">Tempo: <span class="timer-preview"></span></label>
+        <input type="range" id="timer" name="timer" min="0" max="10">
+      </div>
+      <div class="form-input">
+        <label for="point-step">Pontos por ação</label>
+        <select name="point-step" id="point-step">
+          <option value="2" selected>2 pts — Rasteira / Derrubada</option>
+          <option value="3">3 pts — Passagem de Guarda</option>
+          <option value="4">4 pts — Montada / Costa</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-submit">Configurar</button>
+    </form>
+  </div>
+</div>
+
+<audio data-countdown-sound>
+  <source src="./src/audio/323129-Crowd_chants_a_countdown--three-two-one-.mp3" type="audio/mp3">
+  <source src="./src/audio/mixkit-short-race-countdown-926.wav" type="audio/wav">
+</audio>
+
+<script src="./src/js/player.js"></script>
+<script src="./src/js/timer.js"></script>
+<script src="./src/js/game.js"></script>
+<script src="./src/js/modal.js"></script>
+<script src="./src/js/form-submit.js"></script>
+<script src="./src/js/refresh-page.js"></script>
 </body>
-
 </html>

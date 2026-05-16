@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p1name) player1.setName(p1name);
     if (p2name) player2.setName(p2name);
 
+    const t1 = data.get('team1');
+    const t2 = data.get('team2');
+    const teams = document.querySelectorAll('.player-team');
+    if (teams[0] && t1) teams[0].textContent = t1.toUpperCase();
+    if (teams[1] && t2) teams[1].textContent = t2.toUpperCase();
+
     timer.stop();
     timer.setMinutes(data.get('timer'));
 
