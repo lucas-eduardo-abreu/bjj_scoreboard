@@ -1,4 +1,4 @@
-const pointValues = { mounted: 4, guard: 3, overthrow: 2, advantage: 1, punishment: 1, normal: 2 }
+const pointValues = { mounted: 4, guard: 3, overthrow: 2, advantage: 1, punishment: 1, normal: 1 }
 
 function Player(dataKey, name) {
   this.mounted = 0;

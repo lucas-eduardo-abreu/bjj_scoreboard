@@ -24,10 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     timer.stop();
     timer.setMinutes(data.get('timer'));
 
-    const step = parseInt(data.get('point-step') || '2', 10);
-    pointValues.normal = step;
-    document.querySelectorAll('[data-point-step]').forEach(el => { el.textContent = step; });
-
     modal.classList.remove('open');
   });
 
